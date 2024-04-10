@@ -149,6 +149,9 @@ public class ChatActivity extends AppCompatActivity {
                 double distanceToKhandagiri = calculateDistance(userLat, userLong, KHANDAGIRI_LAT, KHANDAGIRI_LONG);
                 double distanceToKiitsquare = calculateDistance(userLat, userLong, KIITSQUARE_LAT, KIITSQUARE_LONG);
 
+//                double distanceToKhandagiri = calculateDistance(userLat, userLong, KIITSQUARE_LAT, KIITSQUARE_LONG );
+//                double distanceToKiitsquare = calculateDistance(userLat, userLong,KHANDAGIRI_LAT, KHANDAGIRI_LONG);
+
                 DatabaseReference database;
                 if (distanceToKhandagiri < distanceToKiitsquare) {
                     database = mKhandagiriDatabase;
@@ -213,6 +216,9 @@ public class ChatActivity extends AppCompatActivity {
 
                                 double distanceToKhandagiri = calculateDistance(userLat, userLong, KHANDAGIRI_LAT, KHANDAGIRI_LONG);
                                 double distanceToKiitsquare = calculateDistance(userLat, userLong, KIITSQUARE_LAT, KIITSQUARE_LONG);
+
+//                                double distanceToKhandagiri = calculateDistance(userLat, userLong, KIITSQUARE_LAT, KIITSQUARE_LONG );
+//                                double distanceToKiitsquare = calculateDistance(userLat, userLong,KHANDAGIRI_LAT, KHANDAGIRI_LONG);
 
                                 DatabaseReference locationDatabase;
                                 if (distanceToKhandagiri < distanceToKiitsquare) {

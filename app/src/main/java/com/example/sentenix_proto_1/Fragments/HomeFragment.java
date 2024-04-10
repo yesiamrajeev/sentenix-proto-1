@@ -129,35 +129,71 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
     public void onRetrieveButtonClick(double userLat, double userLong) {
         String sosMessage = "URGENT, Need Help. Click here for location: https://maps.google.com/maps?q=" + userLat + "," + userLong;
-        FirebaseDatabase.getInstance().getReference("users")
+        DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("users");
+        DatabaseReference userLocationsReference = FirebaseDatabase.getInstance().getReference("userLocations");
 
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+        usersReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot usersSnapshot) {
+                userLocationsReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        ArrayList<String> phoneNumbers = new ArrayList<>();
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            String phone = snapshot.child("phoneNumber").getValue(String.class);
-                            if (phone != null) {
-                                phoneNumbers.add(phone);
+                    public void onDataChange(@NonNull DataSnapshot userLocationsSnapshot) {
+                        for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
+                            String userId = userSnapshot.getKey();
+                            String phoneNumber = userSnapshot.child("phoneNumber").getValue(String.class);
+
+                            // Get user's location from userLocations database
+                            DataSnapshot userLocationSnapshot = userLocationsSnapshot.child(userId);
+                            if (userLocationSnapshot.exists()) {
+                                Double userLocationLat = userLocationSnapshot.child("latitude").getValue(Double.class);
+                                Double userLocationLong = userLocationSnapshot.child("longitude").getValue(Double.class);
+
+                                if (userLocationLat != null && userLocationLong != null) {
+                                    // Calculate distance between user's location and the provided location
+                                    double distance = calculateDistance2(userLat, userLong, userLocationLat, userLocationLong);
+                                    // Check if distance is less than 1km (adjust threshold as needed)
+                                    if (distance < 1.0 && phoneNumber != null) {
+                                        // Send SMS to the user
+                                        SmsManager smsManager = SmsManager.getDefault();
+                                        smsManager.sendTextMessage(phoneNumber, null, sosMessage, null, null);
+                                        // You may also consider handling success/failure here
+                                    }
+                                }
                             }
                         }
-                        // Do something with the phone numbers ArrayList, e.g., display them
-                        for (String phoneNumber : phoneNumbers) {
-                            SmsManager smsManager = SmsManager.getDefault();
-
-                            smsManager.sendTextMessage(phoneNumber,null,sosMessage,null,null);
-                            //Toast.makeText(this,"SMS sent Successfully",Toast.LENGTH_SHORT).show();
-                        }
-
                     }
-
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         // Handle errors
                     }
                 });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors
+            }
+        });
     }
+
+    private double calculateDistance2(double lat1, double lon1, Double lat2, Double lon2) {
+        if (lat2 == null || lon2 == null) {
+            // Handle the case where latitude or longitude is null
+            return Double.MAX_VALUE; // Return a large value indicating invalid distance
+        }
+
+        // The Haversine formula to calculate distance between two points on Earth
+        double R = 6371; // Earth's radius in kilometers
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // Distance in kilometers
+    }
+
     @SuppressLint("MissingPermission")
     private void fetchUserLocationAndSendSOS(String userId, String username) {
         fusedLocationClient.getLastLocation()
