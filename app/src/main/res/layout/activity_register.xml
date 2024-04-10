@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@drawable/gradient_background"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center_vertical"
+        android:text="Create New Account"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_26sdp"
+        android:textStyle="bold" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilerg0"
+        android:layout_width="151dp"
+        android:layout_height="130dp"
+        android:src="@drawable/photocamera"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/username_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Username"
+        android:textColor="#0B0E08"
+        android:textColorHint="#808080"
+        android:background="@drawable/circle_outline"
+        android:textSize="18sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginBottom="2dp" />
+
+    <EditText
+        android:id="@+id/email_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Email"
+        android:textColor="#0B0E08"
+        android:textColorHint="#808080"
+        android:background="@drawable/circle_outline"
+        android:textSize="18sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginBottom="2dp" />
+
+    <EditText
+        android:id="@+id/password_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Password"
+        android:textColor="#0B0E08"
+        android:textColorHint="#808080"
+        android:inputType="textPassword"
+        android:background="@drawable/circle_outline"
+        android:textSize="18sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginBottom="2dp" />
+    <EditText
+        android:id="@+id/otp_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter OTP"
+        android:visibility="gone" /> <!-- Initially hidden -->
+    <EditText
+        android:id="@+id/phone_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Phone Number"
+        android:textColor="#0B0E08"
+        android:textColorHint="#808080"
+        android:background="@drawable/circle_outline"
+        android:textSize="18sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginBottom="16dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/send_otp_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttongreen"
+        android:textColor="#0B0E08"
+
+        android:layout_marginBottom="6dp"
+        android:text="Send OTP" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/verify_otp_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttongreen"
+        android:text="Verify OTP"
+        android:layout_marginBottom="6dp"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/register_button"
+        android:layout_width="match_parent"
+        android:textColor="#0B0E08"
+
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttongreen"
+        android:layout_marginBottom="6dp"
+        android:text="Register" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_link_button"
+        android:layout_width="match_parent"
+        android:textColor="#0B0E08"
+        android:background="@drawable/buttongreen"
+        android:layout_marginBottom="6dp"
+        android:layout_height="wrap_content"
+        android:text="Already have an account? Login here" />
+
+</LinearLayout>

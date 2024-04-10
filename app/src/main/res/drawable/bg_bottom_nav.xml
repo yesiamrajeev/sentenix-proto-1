@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#63D663"/> <!-- Green color -->
+    <corners android:radius="160dp"/> <!-- Adjust the radius to change the curvature -->
+</shape>

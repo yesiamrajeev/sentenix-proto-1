@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#F31919</color>
+    <color name="custom_button_background">#FF5722</color> <!-- Example custom background color -->
+    <color name="custom_button_text_color">#FFFFFF</color> <!-- Example custom text color -->
+    <color name="purple_200">#D5B18ED8</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+
+</resources>
