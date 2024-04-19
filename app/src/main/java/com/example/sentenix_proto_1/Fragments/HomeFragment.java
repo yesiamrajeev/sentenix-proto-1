@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.example.sentenix_proto_1.ChatActivity;
 import com.example.sentenix_proto_1.LocationUpdateService;
 import com.example.sentenix_proto_1.LoginActivity;
+import com.example.sentenix_proto_1.ProfileActivity;
 import com.example.sentenix_proto_1.R;
 import com.example.sentenix_proto_1.UploadActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -61,11 +62,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Button navigateToMainButton = view.findViewById(R.id.navigate_to_main_button);
         Button sendSosButton = view.findViewById(R.id.send_sos_button);
         Button uplbtn = view.findViewById(R.id.uplbtn);
-
+        Button toprofile= view.findViewById(R.id.profileactivity);
 
         navigateToMainButton.setOnClickListener(this);
         sendSosButton.setOnClickListener(this);
        uplbtn.setOnClickListener(this);
+        toprofile.setOnClickListener(this);
 
         Intent serviceIntent = new Intent(requireContext(), LocationUpdateService.class);
         requireActivity().startService(serviceIntent);
@@ -83,7 +85,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             sendSOS();
         }else if(v.getId() == R.id.uplbtn){
             ulpbtn();
+        }else if(v.getId()==R.id.profileactivity) {
+            toprofilevisit();
         }
+    }
+
+    private void toprofilevisit() {
+        Intent i = new Intent(getActivity(), ProfileActivity.class);
+        startActivity(i);
+        requireActivity().finish();
     }
 
     private void ulpbtn() {

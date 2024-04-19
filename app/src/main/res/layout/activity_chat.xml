@@ -11,6 +11,7 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:stackFromBottom="true"
+        android:fontFamily="@font/dancing"
         android:textColor="@android:color/black"
         android:transcriptMode="alwaysScroll" />
 
@@ -29,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColorHint="#808080"
+            android:fontFamily="@font/spartan_thin"
             android:textColor="#0B0E08"
             android:hint="Enter message" />
 
@@ -36,6 +38,7 @@
             android:id="@+id/send_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/spartan_thin"
             android:text="Send" />
 
     </LinearLayout>

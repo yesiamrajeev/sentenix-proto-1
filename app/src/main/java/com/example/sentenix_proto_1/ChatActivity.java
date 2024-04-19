@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.location.Location;
@@ -110,6 +111,7 @@ public class ChatActivity extends AppCompatActivity {
         setupRecyclerView();
         fetchUsername();
     }
+
     @Override
     public void onBackPressed() {
         startActivity(new Intent(ChatActivity.this, MainActivity.class));

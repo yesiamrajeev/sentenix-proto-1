@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Username"
+        android:fontFamily="@font/spartan_thin"
         android:textColor="#0B0E08"
         android:textColorHint="#808080"
         android:background="@drawable/circle_outline"
@@ -46,6 +47,7 @@
         android:layout_height="50dp"
         android:hint="Email"
         android:textColor="#0B0E08"
+        android:fontFamily="@font/spartan_thin"
         android:textColorHint="#808080"
         android:background="@drawable/circle_outline"
         android:textSize="18sp"
@@ -55,6 +57,7 @@
     <EditText
         android:id="@+id/password_edit_text"
         android:layout_width="match_parent"
+        android:fontFamily="@font/spartan_thin"
         android:layout_height="50dp"
         android:hint="Password"
         android:textColor="#0B0E08"
@@ -68,6 +71,7 @@
         android:id="@+id/otp_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/spartan_thin"
         android:hint="Enter OTP"
         android:visibility="gone" /> <!-- Initially hidden -->
     <EditText
@@ -75,6 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Phone Number"
+        android:fontFamily="@font/spartan_thin"
         android:textColor="#0B0E08"
         android:textColorHint="#808080"
         android:background="@drawable/circle_outline"
@@ -88,7 +93,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/buttongreen"
         android:textColor="#0B0E08"
-
+        android:fontFamily="@font/spartan_thin"
         android:layout_marginBottom="6dp"
         android:text="Send OTP" />
 
@@ -98,6 +103,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/buttongreen"
         android:text="Verify OTP"
+        android:fontFamily="@font/spartan_thin"
         android:layout_marginBottom="6dp"
         android:visibility="gone" />
 
@@ -105,7 +111,7 @@
         android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:textColor="#0B0E08"
-
+        android:fontFamily="@font/spartan_thin"
         android:layout_height="wrap_content"
         android:background="@drawable/buttongreen"
         android:layout_marginBottom="6dp"
@@ -116,6 +122,7 @@
         android:layout_width="match_parent"
         android:textColor="#0B0E08"
         android:background="@drawable/buttongreen"
+        android:fontFamily="@font/spartan_thin"
         android:layout_marginBottom="6dp"
         android:layout_height="wrap_content"
         android:text="Already have an account? Login here" />

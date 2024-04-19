@@ -20,9 +20,10 @@
         android:layout_below="@id/imageView"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:fontFamily="@font/spartan_thin"
         android:layout_marginStart="135dp"
-        android:layout_marginTop="-130dp"
-        android:layout_marginBottom="66dp"
+        android:layout_marginTop="-164dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/buttonshape2"
         android:shadowRadius="5"
         android:text="Upload" />
@@ -34,8 +35,21 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="19dp"
-        android:layout_marginEnd="337dp"
+        android:layout_marginEnd="330dp"
         android:background="@drawable/ic_chat_room"
+        android:onClick="onChatRoomButtonClick"
+        android:padding="0dp"
+        android:scaleType="fitCenter" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/profileactivity"
+        android:layout_width="47dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="26dp"
+        android:background="@drawable/baseline_person_24"
         android:onClick="onChatRoomButtonClick"
         android:padding="0dp"
         android:scaleType="fitCenter" />
@@ -46,9 +60,10 @@
         android:layout_height="84dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="23dp"
         android:background="@drawable/ic_sos"
+        android:fontFamily="@font/spartan_thin"
         android:elevation="6dp"
         android:gravity="center"
         android:onClick="onRetrieveButtonClick"
@@ -56,8 +71,7 @@
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:tint="@android:color/white"
-        />
+        android:tint="@android:color/white" />
 
 
 </RelativeLayout>
