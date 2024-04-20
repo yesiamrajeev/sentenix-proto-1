@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             TextView usernameTextView = findViewById(R.id.usernameTextView);
             usernameTextView.setText("Hey! " + username);
         }
+
     }
 
     private void loadFragment(Fragment fragment) {

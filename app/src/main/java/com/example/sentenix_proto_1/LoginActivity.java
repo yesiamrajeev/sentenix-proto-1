@@ -20,8 +20,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
@@ -123,11 +127,37 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                FirebaseAuth auth = FirebaseAuth.getInstance();
+                                FirebaseUser currentUser = auth.getCurrentUser();
+                                String uid = currentUser.getUid();
+                                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
+                                userRef.child("isAD").get().addOnCompleteListener(task2 -> {
+                                    if(task2.isSuccessful()) {
+                                        DataSnapshot dataSnapshot = task2.getResult();
+                                        if(dataSnapshot.exists()) {
+                                            Boolean isAD = dataSnapshot.getValue(Boolean.class);
+                                            if(isAD) {
+                                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(LoginActivity.this, AdminMain.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        }
+                                    }
+                                });
+
+
+
                                 // Login success, navigate to MainActivity
-                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish(); // Close LoginActivity to prevent returning to it using the back button
+//                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                startActivity(intent);
+//                                finish(); // Close LoginActivity to prevent returning to it using the back button
                             } else {
                                 Toast.makeText(LoginActivity.this, "Authentication failed. Please try again.",
                                         Toast.LENGTH_SHORT).show();
