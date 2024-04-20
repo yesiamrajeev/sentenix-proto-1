@@ -3,4 +3,5 @@
     <corners android:radius="20dp" /> <!-- Adjust the radius as needed -->
     <solid android:color="#99141414" />
     <!-- Change the color as needed -->
+
 </shape>
