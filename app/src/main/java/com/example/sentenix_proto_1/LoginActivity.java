@@ -40,10 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseUser currentUser = auth.getCurrentUser();
-    String uid = currentUser.getUid();
-    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
 
 
     @Override
@@ -52,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+
 
         mEmailEditText = findViewById(R.id.email_edit_text);
         mPasswordEditText = findViewById(R.id.password_edit_text);
@@ -133,10 +131,10 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-//                                FirebaseAuth auth = FirebaseAuth.getInstance();
-//                                FirebaseUser currentUser = auth.getCurrentUser();
-//                                String uid = currentUser.getUid();
-//                                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
+                                FirebaseAuth auth = FirebaseAuth.getInstance();
+                                FirebaseUser currentUser = auth.getCurrentUser();
+                                String uid = currentUser.getUid();
+                                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
                                 userRef.child("isAD").get().addOnCompleteListener(task2 -> {
                                     if(task2.isSuccessful()) {
                                         DataSnapshot dataSnapshot = task2.getResult();
