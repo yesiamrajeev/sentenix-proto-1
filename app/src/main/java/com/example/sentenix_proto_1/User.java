@@ -6,7 +6,7 @@ public class User {
     private double latitude;
     private double longitude;
 
-    private boolean isAD = false;
+    private boolean isAD;
 
 
     public User() {
@@ -36,4 +36,6 @@ public class User {
     public double getLongitude() {
         return longitude;
     }
+
+    public boolean getisAD() { return isAD;}
 }
