@@ -2,6 +2,8 @@ package com.example.sentenix_proto_1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -14,11 +16,21 @@ import com.google.firebase.database.DatabaseReference;
 
 public class ProfileActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
-
+    private Button logoutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        logoutButton = findViewById(R.id.button2);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+        });
+
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -34,6 +46,12 @@ public class ProfileActivity extends AppCompatActivity {
             UserEmailTV.setText("Email: "+userEmail);
         }
 
+    }
+    private void logoutUser() {
+        mAuth.signOut();
+        // Redirect to LoginActivity after logout
+        startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+        finish();
     }
     @Override
     public void onBackPressed() {

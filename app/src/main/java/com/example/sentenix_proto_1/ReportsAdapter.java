@@ -42,18 +42,21 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
         TextView descriptionTextView;
         TextView locationTextView;
         TextView timeTextView;
+        TextView dateTextView; // Added date TextView
 
         public ReportViewHolder(@NonNull View itemView) {
             super(itemView);
             descriptionTextView = itemView.findViewById(R.id.textDescription);
             locationTextView = itemView.findViewById(R.id.textLocation);
             timeTextView = itemView.findViewById(R.id.textTime);
+            dateTextView = itemView.findViewById(R.id.dateText); // Initialize date TextView
         }
 
         public void bind(Report report) {
             descriptionTextView.setText(report.getDescription());
             locationTextView.setText(report.getLocation());
             timeTextView.setText(report.getTime());
+            dateTextView.setText(report.getDate()); // Set date text
         }
     }
 }

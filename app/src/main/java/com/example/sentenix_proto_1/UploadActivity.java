@@ -1,11 +1,11 @@
 package com.example.sentenix_proto_1;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.content.Intent;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -66,8 +66,6 @@ public class UploadActivity extends AppCompatActivity {
                 startActivityForResult(intent, PICK_DOCUMENT_REQUEST);
             }
         });
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button navigateToMainButton = findViewById(R.id.top_right_button);
-        navigateToMainButton.setOnClickListener(v -> navigateToMainActivity());
 
         Button cameraButton = findViewById(R.id.filereport);
 
@@ -84,26 +82,39 @@ public class UploadActivity extends AppCompatActivity {
                 String description = descriptionEditText.getText().toString();
                 String location = locationEditText.getText().toString();
                 String time = getCurrentTime(); // Get current time
+                String date = getCurrentDate(); // Get current date
 
                 if (description.isEmpty() || location.isEmpty()) {
                     Toast.makeText(UploadActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Create a new report object with description, location, and time
-                Report report = new Report(description, location, time);
+                // Create a new report object with description, location, time, and date
+                Report report = new Report(description, location, time, date);
 
                 // Push the report to Firebase Realtime Database
-                reportsRef.push().setValue(report);
+                reportsRef.push().setValue(report)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(UploadActivity.this, "Report uploaded successfully", Toast.LENGTH_SHORT).show();
+                                // Clear EditText fields
+                                descriptionEditText.setText("");
+                                locationEditText.setText("");
 
-                // Clear EditText fields
-                descriptionEditText.setText("");
-                locationEditText.setText("");
-
-                // Upload the selected document to Firebase Storage (if available)
-                if (documentUri != null) {
-                    uploadDocumentToFirebaseStorage(documentUri);
-                }
+                                // Upload the selected document to Firebase Storage (if available)
+                                if (documentUri != null) {
+                                    uploadDocumentToFirebaseStorage(documentUri);
+                                }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.e("Firebase", "Error uploading report: " + e.getMessage(), e);
+                                Toast.makeText(UploadActivity.this, "Failed to upload report", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 
@@ -115,20 +126,6 @@ public class UploadActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
-    private void navigateToMainActivity() {
-        startActivity(new Intent(UploadActivity.this, MainActivity.class));
-        finish(); // Finish the current activity so the user cannot navigate back to it
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-
-        if (requestCode == PICK_DOCUMENT_REQUEST && resultCode == RESULT_OK && data != null) {
-            // Get the selected document's URI
-            documentUri = data.getData();
-        }
-    }
 
     private void uploadDocumentToFirebaseStorage(Uri documentUri) {
         // Initialize Firebase Storage
@@ -138,8 +135,6 @@ public class UploadActivity extends AppCompatActivity {
 
         // Upload the document to Firebase Storage
         documentRef.putFile(documentUri)
-
-
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -150,19 +145,23 @@ public class UploadActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e("Firebase", "Error: " + e.getMessage(), e);
+                        Log.e("Firebase", "Error uploading document: " + e.getMessage(), e);
                         // Display an error message or update UI accordingly
                     }
                 });
-
-
-
     }
 
     // Method to get current time in a desired format (e.g., "HH:mm:ss")
     private String getCurrentTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         Date currentTime = Calendar.getInstance().getTime();
-        return dateFormat.format(currentTime);
+        return timeFormat.format(currentTime);
+    }
+
+    // Method to get current date in a desired format (e.g., "yyyy-MM-dd")
+    private String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date currentDate = Calendar.getInstance().getTime();
+        return dateFormat.format(currentDate);
     }
 }

@@ -75,6 +75,11 @@
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
+
+        <activity android:name=".Demoactivity"
+            android:exported="false"/>
+
+
     </application>
 
 </manifest>

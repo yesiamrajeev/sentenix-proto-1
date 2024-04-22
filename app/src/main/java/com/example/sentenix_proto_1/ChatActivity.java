@@ -301,7 +301,8 @@ public class ChatActivity extends AppCompatActivity {
             // Set background drawable with padding and dynamic width for each item
             Drawable backgroundDrawable = ContextCompat.getDrawable(mContext, R.drawable.rectangular_background);
             if (backgroundDrawable != null) {
-                int paddingInPx = (int) mContext.getResources().getDimension(R.dimen._3dp);
+                int paddingInPx = (int) mContext.getResources().getDimension(R.dimen._3dp); // Normal padding of 3dp
+                int leftPadding = (int) mContext.getResources().getDimension(R.dimen._3dp); // Left padding of 4dp
 
                 // Calculate the width based on the length of the text
                 Paint paint = new Paint();
@@ -313,7 +314,7 @@ public class ChatActivity extends AppCompatActivity {
                 int totalHeight = holder.itemView.getHeight();
 
                 // Create an InsetDrawable with padding inside the drawable
-                InsetDrawable insetDrawable = new InsetDrawable(backgroundDrawable, paddingInPx, paddingInPx, paddingInPx, paddingInPx);
+                InsetDrawable insetDrawable = new InsetDrawable(backgroundDrawable, leftPadding, paddingInPx, paddingInPx, paddingInPx);
 
                 // Set the InsetDrawable as the background with adjusted bounds
                 insetDrawable.setBounds(0, 0, totalWidth, totalHeight);
@@ -323,6 +324,8 @@ public class ChatActivity extends AppCompatActivity {
             // Set text color to black
             holder.itemText.setTextColor(ContextCompat.getColor(mContext, android.R.color.black));
         }
+
+
 
 
 

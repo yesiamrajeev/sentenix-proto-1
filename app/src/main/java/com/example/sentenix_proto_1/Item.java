@@ -1,21 +1,21 @@
-// Report.java
 package com.example.sentenix_proto_1;
 
-public class Report {
+public class Item {
+    private String key;
     private String description;
     private String location;
     private String time;
-    private String date;
 
-    public Report() {
+    public Item() {
         // Default constructor required for Firebase
     }
 
-    public Report(String description, String location, String time, String date) {
-        this.description = description;
-        this.location = location;
-        this.time = time;
-        this.date = date;
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getDescription() {
@@ -42,11 +42,12 @@ public class Report {
         this.time = time;
     }
 
-    public String getDate() {
-        return date;
+    // Additional methods for getting details and name
+    public String getDetails() {
+        return "Description: " + description + "\nLocation: " + location + "\nTime: " + time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getName() {
+        return "Case ID: " + key;
     }
 }

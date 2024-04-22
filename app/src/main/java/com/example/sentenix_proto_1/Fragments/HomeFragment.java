@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.sentenix_proto_1.ChatActivity;
+import com.example.sentenix_proto_1.Demoactivity;
 import com.example.sentenix_proto_1.LocationUpdateService;
 import com.example.sentenix_proto_1.LoginActivity;
 import com.example.sentenix_proto_1.ProfileActivity;
@@ -97,7 +98,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void ulpbtn() {
+//        Intent i = new Intent(getActivity(), Demoactivity.class);
         Intent i = new Intent(getActivity(), UploadActivity.class);
+
         startActivity(i);
         requireActivity().finish();
     }
