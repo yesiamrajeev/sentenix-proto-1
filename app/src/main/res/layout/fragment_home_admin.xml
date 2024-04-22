@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.HomeFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-00dp"
+        android:src="@drawable/img" />
+
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/uplbtn"-->
+<!--        android:layout_width="132dp"-->
+<!--        android:layout_height="72dp"-->
+<!--        android:layout_below="@id/imageView"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:fontFamily="@font/spartan_thin"-->
+<!--        android:layout_marginStart="135dp"-->
+<!--        android:layout_marginTop="-164dp"-->
+<!--        android:layout_marginBottom="100dp"-->
+<!--        android:background="@drawable/buttonshape2"-->
+<!--        android:shadowRadius="5"-->
+<!--        android:text="Upload" />-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/navigate_to_main_button"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="330dp"
+        android:background="@drawable/ic_chat_room"
+        android:onClick="onChatRoomButtonClick"
+        android:padding="0dp"
+        android:scaleType="fitCenter" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/profileactivity"
+        android:layout_width="47dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="26dp"
+        android:background="@drawable/baseline_person_24"
+        android:onClick="onChatRoomButtonClick"
+        android:padding="0dp"
+        android:scaleType="fitCenter" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/send_sos_button"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="23dp"
+        android:background="@drawable/ic_sos"
+        android:fontFamily="@font/spartan_thin"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:onClick="onRetrieveButtonClick"
+        android:text="SOS"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:tint="@android:color/white" />
+
+
+</RelativeLayout>

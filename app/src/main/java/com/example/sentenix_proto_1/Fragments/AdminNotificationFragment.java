@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DemoFragment extends Fragment {
+public class AdminNotificationFragment extends Fragment {
     private static final String TAG = "DemoFragment";
 
     private ListView listView;
@@ -35,7 +35,7 @@ public class DemoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_ad_reports, container, false);
+        return inflater.inflate(R.layout.fragment_notification_admin, container, false);
     }
 
     @Override
