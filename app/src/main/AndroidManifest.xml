@@ -78,6 +78,10 @@
 
         <activity android:name=".Demoactivity"
             android:exported="false"/>
+        <activity android:name=".AdminChatActivity"
+            android:exported="false"/>
+        <activity android:name=".AdminProfileActivity"
+            android:exported="false"/>
 
 
     </application>

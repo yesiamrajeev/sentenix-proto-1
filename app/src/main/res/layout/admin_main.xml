@@ -12,13 +12,34 @@
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hey username"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:ellipsize="end"
         android:fontFamily="@font/poppins_regular"
+        android:maxLines="2"
+        android:text="Welcome Back!"
         android:textColor="@android:color/black"
         android:textSize="25sp"
-        android:textStyle="bold"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/poppins_regular"
+        android:maxLines="2"
+        android:paddingLeft="60dp"
+        android:paddingTop="30dp"
+        android:text="Hey username"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+
 
     <FrameLayout
         android:id="@+id/container"

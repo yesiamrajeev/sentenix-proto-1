@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/input_layout"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:stackFromBottom="true"
+        android:fontFamily="@font/dancing"
+        android:textColor="@android:color/black"
+        android:transcriptMode="alwaysScroll" />
+
+
+    <LinearLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorHint="#808080"
+            android:fontFamily="@font/spartan_thin"
+            android:textColor="#0B0E08"
+            android:hint="Enter message" />
+
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spartan_thin"
+            android:text="Send" />
+
+    </LinearLayout>
+
+    <!-- Button in top-right corner -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/top_right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backbtn"
+            android:text="Back" />
+
+    </FrameLayout>
+
+</RelativeLayout>

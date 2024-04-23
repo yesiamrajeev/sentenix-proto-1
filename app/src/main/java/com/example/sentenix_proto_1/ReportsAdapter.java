@@ -49,14 +49,14 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
             descriptionTextView = itemView.findViewById(R.id.textDescription);
             locationTextView = itemView.findViewById(R.id.textLocation);
             timeTextView = itemView.findViewById(R.id.textTime);
-            dateTextView = itemView.findViewById(R.id.dateText); // Initialize date TextView
+            dateTextView = itemView.findViewById(R.id.dateText);
         }
 
         public void bind(Report report) {
             descriptionTextView.setText(report.getDescription());
             locationTextView.setText(report.getLocation());
             timeTextView.setText(report.getTime());
-            dateTextView.setText(report.getDate()); // Set date text
+            dateTextView.setText(report.getDate());
         }
     }
 }
