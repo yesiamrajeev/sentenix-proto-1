@@ -182,7 +182,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 String userId = currentUser.getUid();
 
                                 // Create a User object with only username and phone number
-                                User user = new User(username, mPhoneEditText.getText().toString().trim(), 0.0, 0.0,false);
+                                User user = new User(username, mPhoneEditText.getText().toString().trim(), 0.0, 0.0,0);
 
                                 // Store the user object in the Realtime Database under the user's unique ID
                                 mDatabase.child(userId).setValue(user)

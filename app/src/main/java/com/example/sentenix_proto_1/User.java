@@ -6,14 +6,14 @@ public class User {
     private double latitude;
     private double longitude;
 
-    private boolean isAD;
+    private int isAD;
 
 
     public User() {
         // Default constructor required for Firebase
     }
 
-    public User(String username, String phoneNumber, double latitude, double longitude, boolean isAD) {
+    public User(String username, String phoneNumber, double latitude, double longitude, int isAD) {
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.latitude = latitude;
@@ -37,5 +37,5 @@ public class User {
         return longitude;
     }
 
-    public boolean getisAD() { return isAD;}
+    public int getisAD() { return isAD;}
 }

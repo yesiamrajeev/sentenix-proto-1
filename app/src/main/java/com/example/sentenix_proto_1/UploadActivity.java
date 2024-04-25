@@ -3,6 +3,7 @@ package com.example.sentenix_proto_1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,6 +40,9 @@ public class UploadActivity extends AppCompatActivity {
     private final int CAMERA_REQ_CODE = 100;
     private Uri documentUri; // To store the selected document URI
 
+
+
+    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +55,14 @@ public class UploadActivity extends AppCompatActivity {
         locationEditText = findViewById(R.id.editTextText2);
         submitButton = findViewById(R.id.filereport3);
         documentButton = findViewById(R.id.filereport2);
+        //temp
+
+
+        assert user != null;
+        String userID = user.getUid();
+
+
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -84,13 +96,20 @@ public class UploadActivity extends AppCompatActivity {
                 String time = getCurrentTime(); // Get current time
                 String date = getCurrentDate(); // Get current date
 
+                //userID
+
+//                FirebaseAuth auth = FirebaseAuth.getInstance();
+//                FirebaseUser user = auth.getCurrentUser();
+//                assert user != null;
+//                String userID = user.getUid();
+
                 if (description.isEmpty() || location.isEmpty()) {
                     Toast.makeText(UploadActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 // Create a new report object with description, location, time, and date
-                Report report = new Report(description, location, time, date);
+                Report report = new Report(description, location, time, date, userID);
 
                 // Push the report to Firebase Realtime Database
                 reportsRef.push().setValue(report)

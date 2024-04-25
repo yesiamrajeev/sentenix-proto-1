@@ -17,9 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.example.sentenix_proto_1.AdminChatActivity;
+
 import com.example.sentenix_proto_1.LocationUpdateService;
-import com.example.sentenix_proto_1.AdminProfileActivity;
+import com.example.sentenix_proto_1.PoliceChatActivity;
+import com.example.sentenix_proto_1.PoliceProfileActivity;
 import com.example.sentenix_proto_1.R;
 import com.example.sentenix_proto_1.UploadActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -33,7 +34,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class AdminHomeFragment extends Fragment implements View.OnClickListener {
+public class PoliceHomeFragment extends Fragment implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private FusedLocationProviderClient fusedLocationClient;
@@ -42,22 +43,22 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
     private static final double KIITSQUARE_LAT = 20.3534;
     private static final double KIITSQUARE_LONG = 85.8268;
 
-    public AdminHomeFragment() {
+    public PoliceHomeFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_admin_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_police_home, container, false);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button navigateToMainButton = view.findViewById(R.id.navigate_to_main_button);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button navigateToMainButton = view.findViewById(R.id.navigate_to_main_button_police);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button sendSosButton = view.findViewById(R.id.send_sos_button);
 //        Button uplbtn = view.findViewById(R.id.uplbtn);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button toprofile= view.findViewById(R.id.profileactivityadmin);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button toprofile= view.findViewById(R.id.profileactivitypolice);
 
         navigateToMainButton.setOnClickListener(this);
         sendSosButton.setOnClickListener(this);
@@ -73,7 +74,7 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.navigate_to_main_button) {
+        if (v.getId() == R.id.navigate_to_main_button_police) {
             navigateToMainActivity();
         } else if (v.getId() == R.id.send_sos_button) {
             sendSOS();
@@ -81,13 +82,13 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
 //            if(v.getId() == R.id.uplbtn){
 //            ulpbtn();
 //        }else
-            if(v.getId()==R.id.profileactivityadmin) {
+            if(v.getId()==R.id.profileactivitypolice) {
                 toprofilevisit();
             }
     }
 
     private void toprofilevisit() {
-        Intent i = new Intent(getActivity(), AdminProfileActivity.class);
+        Intent i = new Intent(getActivity(), PoliceProfileActivity.class);
         startActivity(i);
         requireActivity().finish();
     }
@@ -102,7 +103,7 @@ public class AdminHomeFragment extends Fragment implements View.OnClickListener 
 
 
     private void navigateToMainActivity() {
-        Intent i = new Intent(getActivity(), AdminChatActivity.class);
+        Intent i = new Intent(getActivity(), PoliceChatActivity.class);
         startActivity(i);
         requireActivity().finish();
     }

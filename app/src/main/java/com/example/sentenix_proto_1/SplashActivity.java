@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class SplashActivity extends AppCompatActivity {
     ImageView logo;
     TextView name;
@@ -61,12 +63,17 @@ public class SplashActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     User user = dataSnapshot.getValue(User.class);
-                    if (user != null && user.getisAD()) {
+                    if (user != null && Objects.equals(user.getisAD(),1)) {
                         startActivity(new Intent(SplashActivity.this, AdminMain.class));
-                    } else {
+                    }
+                    else if(user != null && Objects.equals(user.getisAD(),2)) {
+                        startActivity(new Intent(SplashActivity.this, PoliceMain.class));
+                    }
+                    else {
                         startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     }
-                } else {
+                }
+                else {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 }
                 finish();

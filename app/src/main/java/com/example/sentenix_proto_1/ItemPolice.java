@@ -1,6 +1,6 @@
 package com.example.sentenix_proto_1;
 
-public class Item {
+public class ItemPolice {
     private String key;
     private String description;
     private String location;
@@ -8,7 +8,7 @@ public class Item {
     private String userID;
 
     private boolean switchState;
-    public Item() {
+    public ItemPolice() {
         // Default constructor required for Firebase
     }
 

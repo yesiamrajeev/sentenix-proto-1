@@ -53,7 +53,7 @@ public class LocationUpdateService extends Service {
         // Check location permission
         if (checkLocationPermission()) {
             startLocationUpdates();
-            showToast("Location Update Service Started");
+            //showToast("Location Update Service Started");
         } else {
             requestLocationPermission();
         }
@@ -92,7 +92,7 @@ public class LocationUpdateService extends Service {
             String username = currentUser.getDisplayName(); // Get the username from FirebaseUser
             String phoneNumber = currentUser.getPhoneNumber(); // Get the phone number from FirebaseUser
 
-            User user = new User(username, phoneNumber, location.getLatitude(), location.getLongitude(),false);
+            User user = new User(username, phoneNumber, location.getLatitude(), location.getLongitude(),0);
 
             Log.d(TAG, "Updating user location: " + user.getUsername() + " - " +
                     user.getPhoneNumber() + " - " + user.getLatitude() + "," + user.getLongitude());

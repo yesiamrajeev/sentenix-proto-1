@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,15 +23,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 import java.util.Objects;
 
-public class ItemAdapter extends ArrayAdapter<Item> {
+public class ItemAdapterPolice extends ArrayAdapter<ItemPolice> {
     private Context context;
-    private List<Item> itemList;
+    private List<ItemPolice> itemList;
 
     private DatabaseReference databaseReference;
 
     int who;
 
-    public ItemAdapter(Context context, List<Item> itemList) {
+    public ItemAdapterPolice(Context context, List<ItemPolice> itemList) {
         super(context, 0, itemList);
         this.context = context;
         this.itemList = itemList;
@@ -43,41 +42,41 @@ public class ItemAdapter extends ArrayAdapter<Item> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_row, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.item_row_police, parent, false);
         }
 
-        final Item currentItem = itemList.get(position);
+        final ItemPolice currentItem = itemList.get(position);
 
-        TextView itemDetails = view.findViewById(R.id.item_details);
+        TextView itemDetails = view.findViewById(R.id.item_details_police);
         itemDetails.setText("Case Details: " + currentItem.getDetails());
 
-        TextView itemText = view.findViewById(R.id.item_text);
+        TextView itemText = view.findViewById(R.id.item_text_police);
         itemText.setText(currentItem.getName());
 
 
-        Switch verifiedSwitch = view.findViewById(R.id.verifiedSwitch);
-        Switch officerSwitch = view.findViewById(R.id.officerSwitch);
+        Switch inProgressSwitch = view.findViewById(R.id.inProgressSwitch);
+        Switch solvedSwitch = view.findViewById(R.id.solvedSwitch);
 
 
         String itemKey = currentItem.getKey();
         DatabaseReference itemRef = databaseReference.child(itemKey);
 
 
-        itemRef.child("verified").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        itemRef.child("inProgress").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     boolean verifiedValue = dataSnapshot.getValue(Boolean.class);
-                    verifiedSwitch.setChecked(verifiedValue);
+                    inProgressSwitch.setChecked(verifiedValue);
                 }
             }
         });
-        itemRef.child("officerAssigned").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        itemRef.child("closed").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     boolean officerAssignedValue = dataSnapshot.getValue(Boolean.class);
-                    officerSwitch.setChecked(officerAssignedValue);
+                    solvedSwitch.setChecked(officerAssignedValue);
                 }
             }
         });
@@ -89,26 +88,26 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 
 
-        verifiedSwitch.setOnClickListener(new View.OnClickListener() {
+        inProgressSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (verifiedSwitch.isChecked()) {
-                    updateProgress(currentItem, 1,"vs"); // Call updateProgress with i = 1 when Switch is checked
+                if (inProgressSwitch.isChecked()) {
+                    updateProgress(currentItem, 1,"ip"); // Call updateProgress with i = 1 when Switch is checked
                 }
                 else{
-                    updateProgress(currentItem, -1,"vs");
+                    updateProgress(currentItem, -1,"ip");
                 }
             }
         });
 
-        officerSwitch.setOnClickListener(new View.OnClickListener() {
+        solvedSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (officerSwitch.isChecked()) {
-                    updateProgress(currentItem, 1,"oa"); // Call updateProgress with i = 1 when Switch is checked
+                if (solvedSwitch.isChecked()) {
+                    updateProgress(currentItem, 1,"so"); // Call updateProgress with i = 1 when Switch is checked
                 }
                 else{
-                    updateProgress(currentItem, -1,"oa");
+                    updateProgress(currentItem, -1,"so");
                 }
             }
         });
@@ -116,17 +115,8 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 
 
-        Button rejectButton = view.findViewById(R.id.reject_button);
-        rejectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteItem(currentItem);
-            }
-        });
 
-
-
-        Button acceptCaseBtn = view.findViewById(R.id.accept_button); //AcceptButton for accepting the case
+        Button acceptCaseBtn = view.findViewById(R.id.accept_button_police); //AcceptButton for accepting the case
         acceptCaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +136,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         return view;
     }
 
-    private void updateProgress(Item item, int i, String who) {
+    private void updateProgress(ItemPolice item, int i, String who) {
         String itemKey = item.getKey();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -166,22 +156,22 @@ public class ItemAdapter extends ArrayAdapter<Item> {
                             int progressInt = Integer.parseInt(progressValue.replace("%", "")); //getting the initial value from database
                             int progressIncrement = 0;//for temporary calculation
 
-                            if(i>0 && Objects.equals(who, "vs")){
+                            if(i>0 && Objects.equals(who, "ip")){
                                 progressIncrement = 25;
-                                itemRef.child("verified").setValue(true);
+                                itemRef.child("inProgress").setValue(true);
 
                             }
-                            else if(i<0 && Objects.equals(who, "vs")){
+                            else if(i<0 && Objects.equals(who, "ip")){
                                 progressIncrement = -25;
-                                itemRef.child("verified").setValue(false);
+                                itemRef.child("inProgress").setValue(false);
                             }
-                            else if(i>0 && Objects.equals(who, "oa")){
+                            else if(i>0 && Objects.equals(who, "so")){
                                 progressIncrement = 25;
-                                itemRef.child("officerAssigned").setValue(true);
+                                itemRef.child("closed").setValue(true);
                             }
-                            else if(i<0 && Objects.equals(who, "oa")){
+                            else if(i<0 && Objects.equals(who, "so")){
                                 progressIncrement = -25;
-                                itemRef.child("officerAssigned").setValue(false);
+                                itemRef.child("closed").setValue(false);
                             }
 
                             int newProgressValue = progressInt + progressIncrement;
@@ -235,7 +225,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
             Toast.makeText(context, "Item key is null or empty", Toast.LENGTH_SHORT).show();
         }
     }
-    private void acceptCase(Item item) {
+    private void acceptCase(ItemPolice item) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentAmin = auth.getCurrentUser();

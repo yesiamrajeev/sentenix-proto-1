@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sentenix_proto_1.R;
 import com.example.sentenix_proto_1.Report;
 import com.example.sentenix_proto_1.ReportsAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class NotificationsFragment extends Fragment {
 
@@ -47,9 +50,17 @@ public class NotificationsFragment extends Fragment {
 
         // Initialize Firebase Realtime Database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        reportsRef = database.getReference("reports");
+        reportsRef = database.getReference("reports"); // reportsRef variable storing Reference to (reports node) in database
 
-        // Listen for changes in the database
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        assert user != null;
+        String currentUserID = user.getUid();
+
+
+        // Listen for any data changes in the database
+        //ondata change it will simply add any changes to reportlist then finally use reportAdapter to show the data in recyclerview
         reportsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -58,7 +69,8 @@ public class NotificationsFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Retrieve report data
                     Report report = snapshot.getValue(Report.class);
-                    if (report != null) {
+                    String caseUserID = report.getUserID();
+                    if (report != null && Objects.equals(caseUserID, currentUserID)) { // here 2 objects's values are compared - so that only current user's data is fetched from report database
                         reportList.add(report);
                     }
                 }

@@ -1,14 +1,21 @@
-package com.example.sentenix_proto_1;
+package com.example.sentenix_proto_1.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
+import com.example.sentenix_proto_1.ItemPolice;
+import com.example.sentenix_proto_1.ItemAdapter;
+import com.example.sentenix_proto_1.ItemAdapterPolice;
+import com.example.sentenix_proto_1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,23 +25,27 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Demoactivity extends AppCompatActivity {
-    private static final String TAG = "Demoactivity";
+public class PoliceNotificationFragment extends Fragment {
+    private static final String TAG = "DemoFragment";
 
     private ListView listView;
-    private ItemAdapter itemAdapter;
-    private List<Item> itemList;
+    private ItemAdapterPolice itemAdapter;
+    private List<ItemPolice> itemList;
     private DatabaseReference databaseReference;
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_notification_police, container, false);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ad_reports);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        listView = findViewById(R.id.list_view);
+        listView = view.findViewById(R.id.list_view_police);
         itemList = new ArrayList<>();
-        itemAdapter = new ItemAdapter(this, itemList);
+        itemAdapter = new ItemAdapterPolice(requireContext(), itemList);
         listView.setAdapter(itemAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("reports");
@@ -43,8 +54,9 @@ public class Demoactivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Item item = snapshot.getValue(Item.class);
-                    if (item != null) {
+                    ItemPolice item = snapshot.getValue(ItemPolice.class);
+                    Boolean isVerified = snapshot.child("verified").getValue(Boolean.class);
+                    if (item != null && Boolean.TRUE.equals(isVerified)) {
                         item.setKey(snapshot.getKey()); // Set the key for the item
                         itemList.add(item);
                     }
@@ -56,14 +68,8 @@ public class Demoactivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e(TAG, "Database Error: " + databaseError.getMessage());
-                Toast.makeText(Demoactivity.this, "Failed to load items.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Failed to load items.", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(Demoactivity.this, MainActivity.class));
-        finish();
-        super.onBackPressed();
     }
 }

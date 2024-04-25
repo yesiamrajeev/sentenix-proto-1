@@ -18,12 +18,12 @@
         android:ellipsize="end"
         android:fontFamily="@font/poppins_regular"
         android:maxLines="2"
-        android:text="Welcome Admin!"
+        android:text="Welcome Officer!"
         android:textColor="@android:color/black"
         android:textSize="25sp"
         android:textStyle="bold" />
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/usernamepolice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -34,24 +34,23 @@
         android:maxLines="2"
         android:paddingLeft="60dp"
         android:paddingTop="30dp"
-        android:text="Hey username"
+        android:text="username"
         android:textColor="@android:color/black"
         android:textSize="25sp"
         android:textStyle="bold" />
 
 
-
     <FrameLayout
-        android:id="@+id/container"
+        android:id="@+id/containerpolice"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bttom_nav_admin"
+        android:layout_above="@id/bttom_nav_police"
         android:layout_marginBottom="9dp">
 
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bttom_nav_admin"
+        android:id="@+id/bttom_nav_police"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

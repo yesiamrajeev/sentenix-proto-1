@@ -43,6 +43,10 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
         TextView locationTextView;
         TextView timeTextView;
         TextView dateTextView; // Added date TextView
+        TextView userIDTextView; // textView for userID in the Case
+        TextView adminName;
+        TextView policeName;
+        TextView progress;
 
         public ReportViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -50,6 +54,10 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
             locationTextView = itemView.findViewById(R.id.textLocation);
             timeTextView = itemView.findViewById(R.id.textTime);
             dateTextView = itemView.findViewById(R.id.dateText);
+            //userIDTextView = itemView.findViewById(R.id.userIDText);
+            adminName = itemView.findViewById(R.id.adminNameText);
+            policeName = itemView.findViewById(R.id.policeNameText);
+            progress = itemView.findViewById(R.id.progressText);
         }
 
         public void bind(Report report) {
@@ -57,6 +65,10 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportVi
             locationTextView.setText(report.getLocation());
             timeTextView.setText(report.getTime());
             dateTextView.setText(report.getDate());
+            //userIDTextView.setText(report.getUserID());
+            adminName.setText(report.getAdminName());
+            policeName.setText(report.getPoliceName());
+            progress.setText(report.getProgress());
         }
     }
 }

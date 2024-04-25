@@ -1,5 +1,6 @@
 <!-- item_row.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_button"
@@ -16,7 +17,7 @@
         android:paddingEnd="16dp"> <!-- Added paddingEnd -->
 
         <TextView
-            android:id="@+id/item_details"
+            android:id="@+id/item_details_police"
             android:layout_width="match_parent"
             android:textColor="@color/black"
             android:fontFamily="@font/poppins_regular"
@@ -24,7 +25,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/item_text"
+            android:id="@+id/item_text_police"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -52,16 +53,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:gravity="end"
+        android:paddingBottom="10dp"
         android:paddingStart="16dp"> <!-- Added paddingStart -->
 
-        <Button
-            android:id="@+id/reject_button"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/accept_button_police"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Report" />
-        <Button
-            android:id="@+id/accept_button"
-            android:layout_width="wrap_content"
+            android:background="@drawable/rounded_button3"
             android:layout_height="wrap_content"
             android:text="Accept" />
 
@@ -70,7 +68,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="93dp"
+        android:layout_height="40dp"
         android:layout_weight="3"
         android:gravity="end"
         android:orientation="horizontal"
@@ -78,21 +76,25 @@
 
 
         <Switch
-            android:id="@+id/verifiedSwitch"
-            android:layout_width="1in"
+            android:id="@+id/inProgressSwitch"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Verified"
-            android:textSize="@dimen/_15sdp" />
+            android:textColor="@color/material_dynamic_neutral_variant30"
+            android:paddingRight="@dimen/_25sdp"
+            android:text="In Progress"
+            android:textSize="17dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Switch
-            android:id="@+id/officerSwitch"
-
+            android:id="@+id/solvedSwitch"
             android:layout_width="168dp"
+            android:textColor="@color/material_dynamic_neutral_variant30"
             android:layout_height="6dp"
             android:layout_weight="1"
-            android:text="Officer"
-            android:textSize="@dimen/_15sdp" />
+            android:text="Solved"
+            android:textSize="17dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </LinearLayout>
 

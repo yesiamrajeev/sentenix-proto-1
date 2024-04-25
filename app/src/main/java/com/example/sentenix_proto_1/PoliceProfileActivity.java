@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AdminProfileActivity extends AppCompatActivity {
+public class PoliceProfileActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     private Button logoutButton;
     @Override
@@ -47,12 +47,12 @@ public class AdminProfileActivity extends AppCompatActivity {
     private void logoutUser() {
         mAuth.signOut();
         // Redirect to LoginActivity after logout
-        startActivity(new Intent(AdminProfileActivity.this, LoginActivity.class));
+        startActivity(new Intent(PoliceProfileActivity.this, LoginActivity.class));
         finish();
     }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(AdminProfileActivity.this, AdminMain.class));
+        startActivity(new Intent(PoliceProfileActivity.this, PoliceMain.class));
         finish();
         super.onBackPressed();
     }

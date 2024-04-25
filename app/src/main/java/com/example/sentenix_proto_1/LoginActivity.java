@@ -139,14 +139,21 @@ public class LoginActivity extends AppCompatActivity {
                                     if(task2.isSuccessful()) {
                                         DataSnapshot dataSnapshot = task2.getResult();
                                         if(dataSnapshot.exists()) {
-                                            Boolean isAD = dataSnapshot.getValue(Boolean.class);
-                                            if(isAD) {
-                                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                                            int isAD = dataSnapshot.getValue(Integer.class);
+                                            if(isAD==1) {
+                                                Toast.makeText(LoginActivity.this, "Logging in as Admin", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(LoginActivity.this, AdminMain.class);
                                                 startActivity(intent);
                                                 finish();
-                                            } else {
-                                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else if(isAD==2) {
+                                                Toast.makeText(LoginActivity.this, "Logging in as Police", Toast.LENGTH_LONG).show();
+                                                Intent intent = new Intent(LoginActivity.this, PoliceMain.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                            else{
+                                                Toast.makeText(LoginActivity.this, "Login as User", Toast.LENGTH_LONG).show();
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                 startActivity(intent);
                                                 finish();
