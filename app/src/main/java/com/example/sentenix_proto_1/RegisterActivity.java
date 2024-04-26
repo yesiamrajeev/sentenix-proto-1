@@ -61,21 +61,21 @@ public class RegisterActivity extends AppCompatActivity {
         mPhoneEditText = findViewById(R.id.phone_edit_text);
         mOtpEditText = findViewById(R.id.otp_edit_text);
         mRegisterButton = findViewById(R.id.register_button);
-        mSendOtpButton = findViewById(R.id.send_otp_button);
+        //mSendOtpButton = findViewById(R.id.send_otp_button);
         mVerifyOtpButton = findViewById(R.id.verify_otp_button);
         mVerifyOtpButton2 = findViewById(R.id.login_link_button);
 
-        mSendOtpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String phoneNumber = mPhoneEditText.getText().toString().trim();
-                if (!TextUtils.isEmpty(phoneNumber)) {
-                    sendOtp(phoneNumber);
-                } else {
-                    Toast.makeText(RegisterActivity.this, "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//        mSendOtpButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String phoneNumber = mPhoneEditText.getText().toString().trim();
+//                if (!TextUtils.isEmpty(phoneNumber)) {
+//                    sendOtp(phoneNumber);
+//                } else {
+//                    Toast.makeText(RegisterActivity.this, "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
         mVerifyOtpButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,6 +7,7 @@ public class Item {
     private String time;
     private String userID;
 
+
     private boolean switchState;
     public Item() {
         // Default constructor required for Firebase

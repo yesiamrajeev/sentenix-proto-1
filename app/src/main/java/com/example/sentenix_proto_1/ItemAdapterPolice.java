@@ -172,6 +172,9 @@ public class ItemAdapterPolice extends ArrayAdapter<ItemPolice> {
                             else if(i<0 && Objects.equals(who, "so")){
                                 progressIncrement = -25;
                                 itemRef.child("closed").setValue(false);
+                            } else if (i>0 && Objects.equals(who,"offA")) {
+                                progressIncrement = 25; //Officer Assigned
+
                             }
 
                             int newProgressValue = progressInt + progressIncrement;
@@ -271,6 +274,21 @@ public class ItemAdapterPolice extends ArrayAdapter<ItemPolice> {
                                 Toast.makeText(context, "Failed to update name", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                itemRef.child("officerAssigned").setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(context, "Officer Allotted", Toast.LENGTH_SHORT).show();
+                                updateProgress(item, 1,"offA");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, "Failed to Allot officer", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
 
             }
         }

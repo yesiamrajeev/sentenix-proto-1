@@ -87,15 +87,15 @@
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginBottom="16dp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/send_otp_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttongreen"
-        android:textColor="#0B0E08"
-        android:fontFamily="@font/spartan_thin"
-        android:layout_marginBottom="6dp"
-        android:text="Send OTP" />
+<!--    <androidx.appcompat.widget.AppCompatButton-->
+<!--        android:id="@+id/send_otp_button"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/buttongreen"-->
+<!--        android:textColor="#0B0E08"-->
+<!--        android:fontFamily="@font/spartan_thin"-->
+<!--        android:layout_marginBottom="6dp"-->
+<!--        android:text="Send OTP" />-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/verify_otp_button"

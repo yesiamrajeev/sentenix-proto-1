@@ -147,21 +147,21 @@ public class ItemAdapter extends ArrayAdapter<Item> {
     }
 
     private void updateProgress(Item item, int i, String who) {
-        String itemKey = item.getKey();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser currentAmin = auth.getCurrentUser();
-        String adminName = user.getDisplayName();
+            String itemKey = item.getKey();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            FirebaseUser currentAmin = auth.getCurrentUser();
+            String adminName = user.getDisplayName();
 
-        if (itemKey != null && !itemKey.isEmpty()) {
+            if (itemKey != null && !itemKey.isEmpty()) {
 
-            DatabaseReference itemRef = databaseReference.child(itemKey); //// reference to the current item in the database
+                DatabaseReference itemRef = databaseReference.child(itemKey); //// reference to the current item in the database
 
-            itemRef.child("progress").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                @Override
-                public void onSuccess(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        String progressValue = dataSnapshot.getValue(String.class);
+                itemRef.child("progress").get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                    @Override
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            String progressValue = dataSnapshot.getValue(String.class);
                         if (progressValue != null) {
                             int progressInt = Integer.parseInt(progressValue.replace("%", "")); //getting the initial value from database
                             int progressIncrement = 0;//for temporary calculation

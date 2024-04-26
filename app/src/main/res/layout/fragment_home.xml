@@ -22,7 +22,7 @@
         android:layout_marginStart="27dp"
         android:layout_marginTop="45dp"
         android:fontFamily="@font/poppins_italic"
-        android:text="Sentenix"
+        android:text="Sentinex"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -47,12 +47,15 @@
         android:layout_height="72dp"
         android:layout_below="@id/imageView"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:fontFamily="@font/spartan_thin"
         android:layout_marginStart="135dp"
         android:layout_marginTop="-164dp"
+        android:layout_marginEnd="144dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/buttonshape2"
+        android:fontFamily="@font/spartan_thin"
+        android:textColor="@color/white"
         android:shadowRadius="5"
         android:text="Upload" />
 

@@ -2,7 +2,7 @@ package com.example.sentenix_proto_1;
 
 public class User {
     private String username;
-    private String phoneNumber;
+    public String phoneNumber;
     private double latitude;
     private double longitude;
 
