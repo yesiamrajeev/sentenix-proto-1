@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class PoliceProfileActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     private Button logoutButton;
-    public DatabaseReference mDatabase;
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class PoliceProfileActivity extends AppCompatActivity {
             UserEmailTV.setText("Email: "+userEmail);
 
 
-            //// reference to the current item in the database
+
             mDatabase = FirebaseDatabase.getInstance().getReference();
             String uid = currentUser.getUid();
             DatabaseReference userRef = mDatabase.child("users").child(uid);

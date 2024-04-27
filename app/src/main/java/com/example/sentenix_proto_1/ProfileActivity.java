@@ -58,14 +58,9 @@ public class ProfileActivity extends AppCompatActivity {
             UserEmailTV.setText("Email: "+userEmail);
 
 
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            FirebaseAuth auth = FirebaseAuth.getInstance();
-            FirebaseUser currentAmin = auth.getCurrentUser();
-            String adminName = user.getDisplayName();
-            //// reference to the current item in the database
             mDatabase = FirebaseDatabase.getInstance().getReference();
             String uid = currentUser.getUid();
-            DatabaseReference userRef = mDatabase.child("Users").child(uid);
+            DatabaseReference userRef = mDatabase.child("users").child(uid);
             userRef .addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {

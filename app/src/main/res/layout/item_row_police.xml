@@ -16,6 +16,8 @@
         android:orientation="vertical"
         android:paddingEnd="16dp"> <!-- Added paddingEnd -->
 
+
+
         <TextView
             android:id="@+id/item_details_police"
             android:layout_width="match_parent"

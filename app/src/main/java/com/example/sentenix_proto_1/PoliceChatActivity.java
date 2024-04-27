@@ -70,7 +70,7 @@ public class PoliceChatActivity extends AppCompatActivity {
         mKhandagiriDatabase = FirebaseDatabase.getInstance().getReference("khandagiri");
         mKiitsquareDatabase = FirebaseDatabase.getInstance().getReference("kiitsquare");
 
-        mEditText = findViewById(R.id.edit_text);
+        mEditText = findViewById(R.id.edit_text_police);
         mRecyclerView = findViewById(R.id.recycler_view);
 
         // Calculate desired width (70% of screen width)
@@ -143,7 +143,7 @@ public class PoliceChatActivity extends AppCompatActivity {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser != null) {
                 String username = currentUser.getDisplayName();
-                mEditText.setText("  ");
+                mEditText.setText("");
 
                 double distanceToKhandagiri = calculateDistance(userLat, userLong, KHANDAGIRI_LAT, KHANDAGIRI_LONG);
                 double distanceToKiitsquare = calculateDistance(userLat, userLong, KIITSQUARE_LAT, KIITSQUARE_LONG);
