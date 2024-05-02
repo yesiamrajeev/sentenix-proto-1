@@ -6,7 +6,8 @@ public class Item {
     private String location;
     private String time;
     private String userID;
-
+    private String adminName;
+    private String policeName;
 
     private boolean switchState;
     public Item() {
@@ -64,4 +65,15 @@ public class Item {
         this.switchState = switchState;
     }
 
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+    public String getAdminName(){return adminName;};
+
+
+    public void setPoliceName(String policeName) {
+        this.policeName = policeName;
+    }
+    public String getPoliceName(){return policeName;};
 }

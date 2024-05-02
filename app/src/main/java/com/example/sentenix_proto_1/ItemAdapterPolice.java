@@ -20,6 +20,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,7 +61,7 @@ public class ItemAdapterPolice extends ArrayAdapter<ItemPolice> {
 
         Switch inProgressSwitch = view.findViewById(R.id.inProgressSwitch);
         Switch solvedSwitch = view.findViewById(R.id.solvedSwitch);
-
+       TextView since = view.findViewById(R.id.case_pending_time_tv);
 
         String itemKey = currentItem.getKey();
         DatabaseReference itemRef = databaseReference.child(itemKey);
@@ -80,6 +85,8 @@ public class ItemAdapterPolice extends ArrayAdapter<ItemPolice> {
                 }
             }
         });
+
+
 
 
 

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AdminNotificationFragment extends Fragment {
+public class AdminMyCaseFragment extends Fragment {
     private static final String TAG = "DemoFragment";
 
     private ListView listView;
@@ -38,14 +38,14 @@ public class AdminNotificationFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_notification_admin, container, false);
+        return inflater.inflate(R.layout.fragment_mycase_admin, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listView = view.findViewById(R.id.list_view);
+        listView = view.findViewById(R.id.list_view_accepted_case);
         itemList = new ArrayList<>();
         itemAdapter = new ItemAdapter(requireContext(), itemList);
         listView.setAdapter(itemAdapter);
@@ -59,7 +59,7 @@ public class AdminNotificationFragment extends Fragment {
                 itemList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Item item = snapshot.getValue(Item.class);
-                    if (item != null && Objects.equals(item.getAdminName(), "Not Allotted")) {
+                    if (item != null && Objects.equals(item.getAdminName(), currentUser.getDisplayName())) {
                         item.setKey(snapshot.getKey()); // Set the key for the item
                         itemList.add(item);
                     }

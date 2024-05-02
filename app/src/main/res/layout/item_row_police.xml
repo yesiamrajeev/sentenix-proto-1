@@ -17,6 +17,14 @@
         android:paddingEnd="16dp"> <!-- Added paddingEnd -->
 
 
+        <TextView
+
+            android:id="@+id/case_pending_time_tv"
+            android:layout_width="match_parent"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_regular"
+            android:layout_height="wrap_content"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/item_details_police"

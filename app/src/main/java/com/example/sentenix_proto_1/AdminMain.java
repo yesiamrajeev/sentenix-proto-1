@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.sentenix_proto_1.Fragments.AdminHomeFragment;
+import com.example.sentenix_proto_1.Fragments.AdminMyCaseFragment;
 import com.example.sentenix_proto_1.Fragments.AdminNotificationFragment;
-import com.example.sentenix_proto_1.Fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,7 +41,7 @@ public class AdminMain extends AppCompatActivity {
                 } else if (id == R.id.nav_notifications) {
                     loadFragment(new AdminNotificationFragment());
                 } else if (id == R.id.nav_profile) {
-                    loadFragment(new ProfileFragment());
+                    loadFragment(new AdminMyCaseFragment());
                 }
                 return true; // Return true to indicate the item is selected
             }

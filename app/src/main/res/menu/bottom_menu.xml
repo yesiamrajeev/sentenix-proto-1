@@ -22,6 +22,6 @@
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/progressimg"
-        android:title="Profile" />
+        android:title="My Case" />
 
 </menu>
