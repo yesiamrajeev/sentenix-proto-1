@@ -89,6 +89,8 @@
             android:exported="false"/>
         <activity android:name=".PoliceChatActivity"
             android:exported="false"/>
+        <activity android:name=".CaseDetailAdmin"
+            android:exported="false"/>
 
     </application>
 

@@ -1,6 +1,7 @@
 package com.example.sentenix_proto_1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,11 +117,18 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 
 
-        Button rejectButton = view.findViewById(R.id.reject_button);
-        rejectButton.setOnClickListener(new View.OnClickListener() {
+        Button detailButton = view.findViewById(R.id.detail_button);
+        detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteItem(currentItem);
+                String itemKey = currentItem.getKey();
+
+                DatabaseReference itemRef = databaseReference.child(itemKey);
+                String caseID = itemRef.getKey();
+                Intent intent = new Intent(context, CaseDetailAdmin.class);
+                intent.putExtra("itemKey",caseID);
+                context.startActivity(intent);
+                //deleteItem(currentItem);
             }
         });
 

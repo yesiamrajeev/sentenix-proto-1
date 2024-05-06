@@ -59,9 +59,13 @@ public class AdminNotificationFragment extends Fragment {
                 itemList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Item item = snapshot.getValue(Item.class);
-                    if (item != null && Objects.equals(item.getAdminName(), "Not Allotted")) {
-                        item.setKey(snapshot.getKey()); // Set the key for the item
-                        itemList.add(item);
+                    String AdminName = item.getAdminName();
+                    if (item != null ) {
+                        if((Objects.equals(AdminName, "Not Allotted"))){
+                            item.setKey(snapshot.getKey()); // Set the key for the item
+                            itemList.add(item);
+                        }
+
                     }
                 }
                 itemAdapter.notifyDataSetChanged();
