@@ -1,1 +1,1 @@
-[![Watch the video](![image](https://github.com/yesiamrajeev/sentenix-proto-1/assets/125568812/cf0e9f9f-d19a-425b-bd93-4805eff3b1dc))](https://youtu.be/xXRMmWvmYjA?si=8D-xON-zSeA34qiT)
+[![Watch the video](https://firebasestorage.googleapis.com/v0/b/gmapyatra.appspot.com/o/Screenshot%202024-06-29%20231914.png?alt=media&token=cb87414b-fa62-4f54-b8bb-5f5bef340083)](https://youtu.be/xXRMmWvmYjA?si=8D-xON-zSeA34qiT)
