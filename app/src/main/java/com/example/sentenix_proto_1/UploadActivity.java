@@ -2,8 +2,11 @@ package com.example.sentenix_proto_1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.sentenix_proto_1.Fragments.NotificationsFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -125,6 +129,11 @@ public class UploadActivity extends AppCompatActivity {
                                 if (documentUri != null) {
                                     uploadDocumentToFirebaseStorage(documentUri);
                                 }
+                                FragmentManager fragmentManager = getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                NotificationsFragment notificationsFragment = new NotificationsFragment();
+                                //fragmentTransaction.replace(R.id.fragment_container, notificationsFragment);
+                                fragmentTransaction.commit();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
