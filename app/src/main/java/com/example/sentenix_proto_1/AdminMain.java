@@ -24,6 +24,7 @@ public class AdminMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Just testing
         setContentView(R.layout.admin_main);
 
         mAuth = FirebaseAuth.getInstance();
