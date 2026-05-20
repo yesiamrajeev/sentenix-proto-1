@@ -1,0 +1,22 @@
+project is this app should make a http request to a server running in go on aws,
+the server will respond with json response
+json will contain xml file
+the app will read those changes and make ui changes
+
+1. add a toggle button in this app, this button will toggle on the value -> admin, user
+2. this vaule will be set in header and sent via http to server, and server will see if this is admin then it will send the response
+else it wont send any response
+3. there should be a button named check for update -> this button will fetch toggle button value set in header and make request,
+once reviced request it will show a pop up update avaible, update now button and not now, if clicked on update now let there be a wait for 5 second
+showing updating and then fire up and change the ui
+while checking for update keep a 4 sec waiting in background showing checking -> because response will come suddenly
+
+for server
+1. give go code for it, that will check admin or user, if user it will share the json response to the app
+2. we have to dockerize this app and put it in ec2 in aws -> give full guide on how to set this up, settign security group, port
+or any other thing -> so that server is fully ready
+
+UI changes
+1. you can change the color -> please check the current implementation and according change -> so that it would be visible to user
+2. also first hide sos button -> in json resposne in update give value to show and after update it should show the button
+it should look like udpate has come
