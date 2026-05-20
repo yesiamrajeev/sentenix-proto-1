@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config version="3">
+    <sos visible="true"/>
+    <colors>
+        <primary>#FFFFFF</primary>
+        <background>#EC407A</background>
+        <sosButton>#D32F2F</sosButton>
+        <uploadButton>#AD1457</uploadButton>
+    </colors>
+    <images>
+        <hero>policev2</hero>
+    </images>
+    <texts>
+        <appTitle>HerShield v2</appTitle>
+        <tagline>Now smarter, faster, safer!</tagline>
+        <uploadLabel>Upload Report</uploadLabel>
+    </texts>
+</config>
+

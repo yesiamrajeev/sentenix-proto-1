@@ -19,7 +19,7 @@
             android:layout_height="56dp"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
-            android:text="Sentinex"
+            android:text="HerShield"
             android:textColor="@color/white"
             android:textSize="@dimen/_30sdp"
             app:layout_constraintBottom_toBottomOf="parent"

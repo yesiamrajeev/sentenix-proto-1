@@ -25,6 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sentenixproto1"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".AdminMain"

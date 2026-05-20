@@ -1,108 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#2E7D32"
+    android:padding="16dp"
     tools:context=".Fragments.HomeFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="-00dp"
-        android:src="@drawable/policeicon" />
+    <!-- Top bar: chat (left), role toggle (center), profile (right) -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/navigate_to_main_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/ic_chat_room"
+        android:padding="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/roleToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#33FFFFFF"
+        android:paddingStart="12dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="6dp"
+        android:text="Role: user"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/profileactivity"
+        app:layout_constraintStart_toEndOf="@+id/navigate_to_main_button"
+        app:layout_constraintTop_toTopOf="@+id/navigate_to_main_button"
+        app:layout_constraintBottom_toBottomOf="@+id/navigate_to_main_button" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/profileactivity"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/baseline_person_24"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Title + tagline -->
     <TextView
         android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/navigate_to_main_button"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/poppins_italic"
-        android:text="Sentinex"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:text="HerShield"
+        android:textColor="@android:color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navigate_to_main_button" />
 
     <TextView
         android:id="@+id/SCYNC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/welcomeTextView"
-        android:layout_alignEnd="@+id/welcomeTextView"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="-232dp"
+        android:layout_marginTop="6dp"
         android:fontFamily="@font/poppins_italic"
-        android:text="The Synchronization we need!"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="The synchronization we need!"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
 
+    <!-- Hero image (swappable on update) -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="24dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/policeicon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SCYNC" />
+
+    <!-- Action row: Upload + Check for update, evenly split -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/uplbtn"
-        android:layout_width="132dp"
-        android:layout_height="72dp"
-        android:layout_below="@id/imageView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="135dp"
-        android:layout_marginTop="-164dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginBottom="100dp"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/buttonshape2"
         android:fontFamily="@font/spartan_thin"
+        android:text="Upload"
         android:textColor="@color/white"
-        android:shadowRadius="5"
-        android:text="Upload" />
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/send_sos_button"
+        app:layout_constraintEnd_toStartOf="@+id/checkUpdateButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:layout_marginTop="32dp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/navigate_to_main_button"
-        android:layout_width="54dp"
-        android:layout_height="53dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="330dp"
-        android:background="@drawable/ic_chat_room"
-        android:onClick="onChatRoomButtonClick"
-        android:padding="0dp"
-        android:scaleType="fitCenter" />
+        android:id="@+id/checkUpdateButton"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/buttonshape2"
+        android:fontFamily="@font/spartan_thin"
+        android:text="Check for update"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/uplbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/uplbtn"
+        app:layout_constraintTop_toTopOf="@+id/uplbtn" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/profileactivity"
-        android:layout_width="47dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="26dp"
-        android:background="@drawable/baseline_person_24"
-        android:onClick="onChatRoomButtonClick"
-        android:padding="0dp"
-        android:scaleType="fitCenter" />
-
+    <!-- SOS: bottom-right circular, hidden until admin update applied -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/send_sos_button"
         android:layout_width="84dp"
         android:layout_height="84dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/ic_sos"
-        android:fontFamily="@font/spartan_thin"
         android:elevation="6dp"
+        android:fontFamily="@font/spartan_thin"
         android:gravity="center"
-        android:onClick="onRetrieveButtonClick"
         android:text="SOS"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:tint="@android:color/white" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
