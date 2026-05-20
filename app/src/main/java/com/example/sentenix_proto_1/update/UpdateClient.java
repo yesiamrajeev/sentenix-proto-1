@@ -14,7 +14,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 public final class UpdateClient {
-    public static final String ENDPOINT = "http://13.126.161.25:8080/check-update";
+    public static final String ENDPOINT = "http://65.2.148.170:8080/check-update";
     public static final String HEADER_ROLE = "X-Client-Role";
     public static final String ROLE_ADMIN = "admin";
     public static final String ROLE_USER = "user";

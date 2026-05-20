@@ -12,6 +12,9 @@ public final class ConfigStore {
     private static final String KEY_APPLIED = "applied";
     private static final String KEY_XML = "xml";
     private static final String KEY_VERSION = "version";
+    private static final String KEY_ROLE = "role";
+    public static final String ROLE_USER = "user";
+    public static final String ROLE_ADMIN = "admin";
 
     private final SharedPreferences prefs;
 
@@ -42,6 +45,20 @@ public final class ConfigStore {
     }
 
     public void clear() {
-        prefs.edit().clear().apply();
+        // Preserve role; only wipe the applied-update state.
+        prefs.edit()
+                .remove(KEY_APPLIED)
+                .remove(KEY_XML)
+                .remove(KEY_VERSION)
+                .apply();
+    }
+
+    @NonNull
+    public String getRole() {
+        return prefs.getString(KEY_ROLE, ROLE_USER);
+    }
+
+    public void saveRole(@NonNull String role) {
+        prefs.edit().putString(KEY_ROLE, role).apply();
     }
 }

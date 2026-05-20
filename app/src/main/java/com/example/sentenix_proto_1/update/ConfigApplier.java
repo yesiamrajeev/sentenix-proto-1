@@ -160,4 +160,48 @@ public final class ConfigApplier {
         if (bg == null) return;
         bg.mutate().setColorFilter(color, PorterDuff.Mode.SRC_IN);
     }
+
+    private static void clearTint(@NonNull View v) {
+        Drawable bg = v.getBackground();
+        if (bg != null) bg.mutate().clearColorFilter();
+    }
+
+    /**
+     * Restores the original (pre-update) look of HomeFragment. Used by rollback
+     * and by the role toggle when switching to user mode.
+     */
+    public static void applyDefaults(@NonNull View root) {
+        View bg = root.findViewById(R.id.homeRoot);
+        if (bg == null) bg = root;
+        bg.setBackgroundColor(Color.parseColor("#2E7D32"));
+
+        View sos = root.findViewById(R.id.send_sos_button);
+        if (sos != null) {
+            sos.setVisibility(View.GONE);
+            clearTint(sos);
+        }
+
+        TextView title = root.findViewById(R.id.welcomeTextView);
+        if (title != null) {
+            title.setText("HerShield");
+            title.setTextColor(Color.WHITE);
+        }
+
+        TextView tagline = root.findViewById(R.id.SCYNC);
+        if (tagline != null) {
+            tagline.setText("The synchronization we need!");
+            tagline.setTextColor(Color.WHITE);
+        }
+
+        Button upload = root.findViewById(R.id.uplbtn);
+        if (upload != null) {
+            upload.setText("Upload");
+            clearTint(upload);
+        }
+
+        ImageView hero = root.findViewById(R.id.imageView);
+        if (hero != null) {
+            hero.setImageResource(R.drawable.policeicon);
+        }
+    }
 }

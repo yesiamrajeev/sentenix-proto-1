@@ -98,7 +98,6 @@
         android:text="Upload"
         android:textColor="@color/white"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/send_sos_button"
         app:layout_constraintEnd_toStartOf="@+id/checkUpdateButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -119,6 +118,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/uplbtn"
         app:layout_constraintTop_toTopOf="@+id/uplbtn" />
+
+    <!-- Rollback: only shown when an update is applied AND role is admin -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/rollbackButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/buttonshape2"
+        android:fontFamily="@font/spartan_thin"
+        android:text="Rollback Update"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uplbtn" />
 
     <!-- SOS: bottom-right circular, hidden until admin update applied -->
     <androidx.appcompat.widget.AppCompatButton

@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private View rootView;
     private SwitchCompat roleToggle;
+    private Button rollbackButton;
     private final UpdateClient updateClient = new UpdateClient();
     private ConfigStore configStore;
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -86,6 +87,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         Button uplbtn = view.findViewById(R.id.uplbtn);
         Button toprofile= view.findViewById(R.id.profileactivity);
         Button checkUpdateButton = view.findViewById(R.id.checkUpdateButton);
+        rollbackButton = view.findViewById(R.id.rollbackButton);
         roleToggle = view.findViewById(R.id.roleToggle);
 
         navigateToMainButton.setOnClickListener(this);
@@ -93,11 +95,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
        uplbtn.setOnClickListener(this);
         toprofile.setOnClickListener(this);
         checkUpdateButton.setOnClickListener(this);
+        rollbackButton.setOnClickListener(this);
+
+        // Restore persisted role before wiring the listener so we don't fire
+        // the visual-state callback during setup with the wrong default.
+        boolean startAsAdmin = UpdateClient.ROLE_ADMIN.equals(configStore.getRole());
+        roleToggle.setChecked(startAsAdmin);
+        roleToggle.setText(startAsAdmin ? "Role: admin" : "Role: user");
 
         roleToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 roleToggle.setText(isChecked ? "Role: admin" : "Role: user");
+                configStore.saveRole(isChecked ? UpdateClient.ROLE_ADMIN : UpdateClient.ROLE_USER);
+                applyRoleVisualState();
             }
         });
 
@@ -105,27 +116,70 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         requireActivity().startService(serviceIntent);
         Toast.makeText(requireContext(), "Location Update Service Started...", Toast.LENGTH_SHORT).show();
 
-        reapplyPersistedConfig();
+        applyRoleVisualState();
 
         return view;
     }
 
-    private void reapplyPersistedConfig() {
-        if (!configStore.isApplied()) return;
-        String xml = configStore.getAppliedXml();
-        if (xml == null) return;
-        try {
-            ConfigApplier.Config cfg = ConfigApplier.parse(xml);
-            ConfigApplier.apply(rootView, cfg);
-        } catch (Exception e) {
-            Log.w(TAG, "failed to reapply persisted config", e);
+    /**
+     * Renders the screen based on (role, isApplied):
+     *   admin + applied  -> reapply stored XML, show rollback
+     *   anything else    -> show defaults, hide rollback
+     * Storage is untouched, so flipping the toggle is a pure visual swap.
+     */
+    private void applyRoleVisualState() {
+        boolean isAdmin = UpdateClient.ROLE_ADMIN.equals(currentRole());
+        boolean hasUpdate = configStore.isApplied();
+
+        if (isAdmin && hasUpdate) {
+            String xml = configStore.getAppliedXml();
+            if (xml != null) {
+                try {
+                    ConfigApplier.Config cfg = ConfigApplier.parse(xml);
+                    ConfigApplier.apply(rootView, cfg);
+                    if (rollbackButton != null) rollbackButton.setVisibility(View.VISIBLE);
+                    return;
+                } catch (Exception e) {
+                    Log.w(TAG, "failed to reapply persisted config; falling back to defaults", e);
+                }
+            }
         }
+
+        ConfigApplier.applyDefaults(rootView);
+        if (rollbackButton != null) rollbackButton.setVisibility(View.GONE);
     }
 
     private String currentRole() {
         return (roleToggle != null && roleToggle.isChecked())
                 ? UpdateClient.ROLE_ADMIN
                 : UpdateClient.ROLE_USER;
+    }
+
+    private void onRollbackClicked() {
+        if (!configStore.isApplied()) {
+            Toast.makeText(requireContext(), "Nothing to roll back", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Rollback Update")
+                .setMessage("Revert HerShield to its previous version? You can re-apply by checking for updates again.")
+                .setPositiveButton("Rollback", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        configStore.clear();
+                        ConfigApplier.applyDefaults(rootView);
+                        if (rollbackButton != null) rollbackButton.setVisibility(View.GONE);
+                        Toast.makeText(requireContext(), "Rolled back", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 
     private void onCheckForUpdateClicked() {
@@ -209,6 +263,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 ConfigApplier.Config cfg = ConfigApplier.parse(xml);
                 ConfigApplier.apply(rootView, cfg);
                 configStore.save(xml, 2);
+                if (rollbackButton != null
+                        && UpdateClient.ROLE_ADMIN.equals(currentRole())) {
+                    rollbackButton.setVisibility(View.VISIBLE);
+                }
                 updating.dismiss();
                 Toast.makeText(requireContext(), "Updated", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
@@ -234,6 +292,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             toprofilevisit();
         }else if(v.getId()==R.id.checkUpdateButton) {
             onCheckForUpdateClicked();
+        }else if(v.getId()==R.id.rollbackButton) {
+            onRollbackClicked();
         }
     }
 
